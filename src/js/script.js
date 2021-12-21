@@ -60,7 +60,7 @@
 			thisProduct.id = id;
 			thisProduct.data = data;
 			thisProduct.renderInMenu();
-			thisProduct.renderInMenu();
+			thisProduct.getElements();
 			thisProduct.initAccordion();
 			thisProduct.initOrderForm();
 			thisProduct.processOrder();
@@ -75,7 +75,7 @@
 		}
 		getElements() {
 			const thisProduct = this;
-			thisProduct.accordionTringger = thisProduct.element.querySelector(
+			thisProduct.accordionTrigger = thisProduct.element.querySelector(
 				select.menuProduct.clickable
 			);
 			thisProduct.form = thisProduct.element.querySelector(
@@ -89,6 +89,9 @@
 			);
 			thisProduct.priceElem = thisProduct.element.querySelector(
 				select.menuProduct.priceElem
+			);
+			thisProduct.imageWrapper = thisProduct.element.querySelector(
+				select.menuProduct.imageWrapper
 			);
 		}
 		initAccordion() {
@@ -158,6 +161,14 @@
 						if (!option.default === true) {
 							// reduce price variable
 							price -= option.price;
+						}
+					}
+					const optionImage = thisProduct.imageWrapper.querySelector(
+						".${paramId}-${optionId}"
+					);
+					if (optionImage) {
+						if (formData[paramId] && formData[paramId].includes(optionId)) {
+							optionImage.classList.add(classNames.menuProduct.imageVisible);
 						}
 					}
 					// update calculated price in the html
