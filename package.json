@@ -14,7 +14,6 @@
 		"test:js": "eslint src/js/",
 		"test:scss": "stylelint src/sass/",
 		"build": "npm-run-all build:* test",
-		"build:clean": "rimraf dist && mkdirp dist",
 		"build:copy": "copyfiles -a -u 1 -e \"**/sass/**/*\" -e \"**/.gitkeep\" \"src/**/*\" dist",
 		"build:sass": "node-sass --output-style compact -o dist/css src/sass",
 		"build:autoprefixer": "postcss dist/css/*.css --use autoprefixer -d dist/css",
@@ -30,7 +29,6 @@
 	"license": "ISC",
 	"dependencies": {},
 	"devDependencies": {
-		"rimraf": "^3.0.2",
 		"autoprefixer": "^10.2.4",
 		"browser-sync": "^2.26.3",
 		"copyfiles": "^2.1.0",
