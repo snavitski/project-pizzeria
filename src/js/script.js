@@ -24,13 +24,13 @@
 			priceElem: ".product__total-price .price",
 			imageWrapper: ".product__images",
 			amountWidget: ".widget-amount",
-			cartButton: '[href="#add-to-cart"]',
+			cartButton: `[href="#add-to-cart"]`,
 		},
 		widgets: {
 			amount: {
 				input: "input.amount", // CODE CHANGED
-				linkDecrease: 'a[href="#less"]',
-				linkIncrease: 'a[href="#more"]',
+				linkDecrease: `a[href="#less"]`,
+				linkIncrease: `a[href="#more"]`,
 			},
 		},
 		// CODE ADDED START
@@ -43,15 +43,15 @@
 			subtotalPrice: ".cart__order-subtotal .cart__order-price-sum strong",
 			deliveryFee: ".cart__order-delivery .cart__order-price-sum strong",
 			form: ".cart__order",
-			formSubmit: '.cart__order [type="submit"]',
-			phone: '[name="phone"]',
-			address: '[name="address"]',
+			formSubmit: `.cart__order [type="submit"]`,
+			phone: `[name="phone"]`,
+			address: `[name="address"]`,
 		},
 		cartProduct: {
 			amountWidget: ".widget-amount",
 			price: ".cart__product-price",
-			edit: '[href="#edit"]',
-			remove: '[href="#remove"]',
+			edit: `[href="#edit"]`,
+			remove: `[href="#remove"]`,
 		},
 		// CODE ADDED END
 	};
@@ -279,6 +279,29 @@
 			thisWidget.element.dispatchEvent(event);
 		}
 	}
+	class Cart {
+		constructor(element) {
+			const thisCart = this;
+			thisCart.products = [];
+			thisCart.getElements(element);
+			thisCart.initAction();
+			console.log("newCart", thisCart);
+		}
+		getElements(element) {
+			const thisCart = this;
+			thisCart.dom = {};
+			thisCart.dom.warapper = element;
+			thisCart.dom.togleTrigger = thisCart.dom.wrapper.querySelector(
+				select.cart.toggleTrigger
+			);
+		}
+		initAction() {
+			const thisCart = this;
+			thisCart.dom.toggleTrigger.addEventListener("click", function () {
+				thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+			});
+		}
+	}
 	const app = {
 		initMenu: function () {
 			const thisApp = this;
@@ -301,8 +324,13 @@
 			console.log("templates:", templates);
 			thisApp.initData();
 			thisApp.initMenu();
+			thisApp.initCart();
+		},
+		initCart: function () {
+			const thisApp = this;
+			const cartElem = document.querySelector(select.containerOf.cart);
+			thisApp.cart = new Cart(cartElem);
 		},
 	};
-
 	app.init();
 }
