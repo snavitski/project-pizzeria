@@ -256,16 +256,14 @@
 				const param = thisProduct.data.params[paramId];
 				params[paramId] = {
 					label: param.label,
-					option: {},
+					options: {},
 				};
-				for (let optionId in param.option) {
+				for (let optionId in param.options) {
 					const option = param.options[optionId];
 					const optionSelected =
 						formData[paramId] && formData[paramId].includes(optionId);
 					if (optionSelected) {
-						if (optionSelected.includes(optionId)) {
-							params[paramId].options[optionId] = option.label;
-						}
+						params[paramId].options[optionId] = option.label;
 					}
 				}
 				return params;
@@ -356,6 +354,13 @@
 			thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(
 				select.cart.totalNumber
 			);
+			thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+			thisCart.dom.address = thisCart.dom.wrapper.querySelector(
+				select.cart.address
+			);
+			thisCart.dom.phone = thisCart.dom.wrapper.querySelector(
+				select.cart.phone
+			);
 		}
 		initAction() {
 			const thisCart = this;
@@ -368,8 +373,13 @@
 			thisCart.dom.productList.addEventListener("remove", function () {
 				thisCart.remove(event.detail.cartProduct);
 			});
+			thisCart.dom.form.addEventListener("submit", function (event) {
+				event.preventDefault();
+				thisCart.sendOrder();
+			});
 		}
 		add(menuProduct) {
+			console.log("menuProduct", menuProduct);
 			const thisCart = this;
 			const generatedHTML = templates.cartProduct(menuProduct);
 			const generateDom = utils.createDOMFromHTML(generatedHTML);
@@ -378,20 +388,20 @@
 		}
 		update() {
 			const thisCart = this;
-			const deliveryFee = settings.cart.defaultDeliveryFee;
-			let totalNumber = 0;
-			let subtotalPrice = 0;
+			thisCart.deliveryFee = 0;
+			thisCart.totalNumber = 0;
+			thisCart.subtotalPrice = 0;
 			for (const product of thisCart.products) {
-				totalNumber = totalNumber + product.amount;
-				subtotalPrice = subtotalPrice + product.price;
+				thisCart.totalNumber = thisCart.totalNumber + product.amount;
+				thisCart.subtotalPrice = thisCart.subtotalPrice + product.price;
 			}
-			if (totalNumber == 0) {
-				deliveryFee == 0;
+			if (thisCart.initActiontotalNumber !== 0) {
+				thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
 			}
-			thisCart.totalPrice = subtotalPrice + deliveryFee;
-			thisCart.dom.totalNumber.innerHTML = totalNumber;
-			thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
-			thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+			thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+			thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
+			thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
+			thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
 			for (const totalPrice of thisCart.dom.totalPrice) {
 				totalPrice.innerHTML = thisCart.totalPrice;
 			}
@@ -402,6 +412,30 @@
 			removedProduct.dom.wrapper.remove();
 			thisCart.products.splice(indexOfremovedProduct, 1);
 			thisCart.update();
+		}
+		sendOrder() {
+			const thisCart = this;
+			const url = settings.db.url + "/" + settings.db.orders;
+			let playload = {};
+			console.log.apply(playload);
+			playload.address = thisCart.dom.address.value;
+			playload.phone = thisCart.dom.phone.value;
+			playload.totalPrice = thisCart.totalPrice;
+			playload.subtotalPrice = thisCart.subtotalPrice;
+			playload.totalNumber = thisCart.totalNumber;
+			playload.deliveryFee = thisCart.deliveryFee;
+			playload.products = [];
+			for (let prod of thisCart.products) {
+				playload.products.push(prod.getData());
+			}
+			const options = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(playload),
+			};
+			fetch(url, options);
 		}
 	}
 	class CartProduct {
@@ -463,6 +497,17 @@
 				},
 			});
 			thisCartProduct.dom.wrapper.dispatchEvent(event);
+		}
+		getData() {
+			const thisCartProduct = this;
+			let productData = {};
+			productData.id = thisCartProduct.id;
+			productData.amount = thisCartProduct.amount;
+			productData.price = thisCartProduct.price;
+			productData.priceSingle = thisCartProduct.priceSingle;
+			productData.name = thisCartProduct.name;
+			productData.params = thisCartProduct.params;
+			return productData;
 		}
 	}
 	const app = {
