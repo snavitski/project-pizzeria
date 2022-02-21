@@ -2,11 +2,15 @@
 export const select = {
   templateOf: {
     menuProduct: "#template-menu-product",
-    cartProduct: "#template-cart-product", // CODE ADDED
+    cartProduct: "#template-cart-product",
+    bookingWidget: "#template-booking-widget",
+     // CODE ADDED
   },
   containerOf: {
     menu: "#product-list",
     cart: "#cart",
+    pages: '#pages',
+    booking: 'booking-wrapper',
   },
   all: {
     menuProducts: "#product-list > .product",
@@ -26,6 +30,25 @@ export const select = {
       input: "input.amount", // CODE CHANGED
       linkDecrease: `a[href="#less"]`,
       linkIncrease: `a[href="#more"]`,
+    },
+    widgets: {
+      datePicker: {
+        wrapper: `.data-piecker`,
+        input: `input[name="date"]`,
+      },
+      hourPicker:{
+        wrapper: `.hour-picker`,
+        input: `input[type="range"]`,
+        output: `.output`,
+      },
+    },
+    booking: {
+      peopleAmount: `.people-amount`,
+      hoursAmount: `.hours-amount`,
+      tables: `.floor-plan .table`,
+    },
+    nav: {
+      links: `main-nava a`,
     },
   },
   // CODE ADDED START
@@ -60,6 +83,16 @@ export const classNames = {
   cart: {
     wrapperActive: "active",
   },
+  booking: {
+    loadnig: `loadnig`,
+    tableBooked: `booked`,
+  },
+  nav: {
+    active: `active`,
+  },
+  pages: {
+    active: `active`,
+  },
   // CODE ADDED END
 };
 
@@ -78,6 +111,27 @@ export const settings = {
     products: "products",
     orders: "orders",
   },
+  hours: {
+    open: 12,
+    closed: 24,
+  },
+  datePicker: {
+    maxDaysInFuture: 14,
+  },
+  booking: {
+    tableIdAttribute: `data-table`,
+  },
+  db: {
+    url: `//localhost3131`,
+    product: `product`,
+    order: `order`,
+    booking: `booking`,
+    event: `event`,
+    dataSartParamKey: `data_gte`,
+    dateEndParamKey: `date_lte`,
+    notRepeatParam: `repeat=falce`,
+    repeatParam: `repeat_ne=falce`,
+  },
   // CODE ADDED END
 };
 
@@ -89,5 +143,6 @@ export const templates = {
   cartProduct: Handlebars.compile(
     document.querySelector(select.templateOf.cartProduct).innerHTML
   ),
+  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
   // CODE ADDED END
 };
