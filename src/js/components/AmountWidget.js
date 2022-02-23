@@ -1,12 +1,13 @@
-import { settings, select } from "./settings.js";
+import { settings, select } from "../settings.js";
 
 class AmountWidget {
 	constructor(element) {
 		const thisWidget = this;
 		thisWidget.getElements(element);
 		thisWidget.setValue(thisWidget.input.value);
-		console.log("AmountWidget:", thisWidget);
-		console.log("constructor arguments:", element);
+		thisWidget.initAction();
+		//console.log("AmountWidget:", thisWidget);
+		//console.log("constructor arguments:", element);
 	}
 	getElements(element) {
 		const thisWidget = this;
@@ -14,7 +15,7 @@ class AmountWidget {
 		thisWidget.input = thisWidget.element.querySelector(
 			select.widgets.amount.input
 		);
-		thisWidget.linksDecrease = thisWidget.element.querySelector(
+		thisWidget.linkDecrease = thisWidget.element.querySelector(
 			select.widgets.amount.linkDecrease
 		);
 		thisWidget.linkIncrease = thisWidget.element.querySelector(
@@ -26,7 +27,12 @@ class AmountWidget {
 		const thisWidget = this;
 		const newValue = parseInt(value);
 		/*TODO Add validation*/
-		if (thisWidget.value !== newValue && !isNaN(newValue)) {
+		if (
+			thisWidget.value !== newValue &&
+			!isNaN(newValue) &&
+			newValue >= settings.amountWidget.defaultMin &&
+			newValue <= settings.amountWidget.defaultMax
+		) {
 			thisWidget.value = newValue;
 		}
 		thisWidget.announce();

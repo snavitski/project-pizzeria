@@ -10,7 +10,7 @@ export const select = {
 		menu: "#product-list",
 		cart: "#cart",
 		pages: "#pages",
-		booking: "booking-wrapper",
+		booking: ".booking-wrapper",
 	},
 	all: {
 		menuProducts: "#product-list > .product",
@@ -42,14 +42,14 @@ export const select = {
 				output: `.output`,
 			},
 		},
-		booking: {
-			peopleAmount: `.people-amount`,
-			hoursAmount: `.hours-amount`,
-			tables: `.floor-plan .table`,
-		},
-		nav: {
-			links: `main-nava a`,
-		},
+	},
+	booking: {
+		peopleAmount: `.people-amount`,
+		hoursAmount: `.hours-amount`,
+		tables: `.floor-plan .table`,
+	},
+	nav: {
+		links: `main-nava a`,
 	},
 	// CODE ADDED START
 	cart: {
@@ -106,11 +106,7 @@ export const settings = {
 	cart: {
 		defaultDeliveryFee: 20,
 	},
-	db: {
-		url: "//localhost:3131",
-		products: "products",
-		orders: "orders",
-	},
+
 	hours: {
 		open: 12,
 		closed: 24,
@@ -122,8 +118,8 @@ export const settings = {
 		tableIdAttribute: `data-table`,
 	},
 	db: {
-		url: `//localhost3131`,
-		product: `product`,
+		url: `//localhost:3131`,
+		products: `products`,
 		order: `order`,
 		booking: `booking`,
 		event: `event`,

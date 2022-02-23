@@ -1,5 +1,5 @@
-import { templates } from "../settings";
-import AmountWidget from ".AmountWidget.js";
+import { templates, select } from "../settings.js";
+import AmountWidget from "./AmountWidget.js";
 
 class Booking {
 	constructor(element) {
@@ -8,7 +8,7 @@ class Booking {
 		thisBooking.initWidgets();
 	}
 	render(element) {
-		thisBooking = this;
+		const thisBooking = this;
 		const generatedHTML = templates.bookingWidget(element);
 		thisBooking.dom = {};
 		thisBooking.dom.wrapper = element;

@@ -1,5 +1,5 @@
-import { settings, select, classNames, templates } from "./settings.js";
-import { utils } from "./utils.js";
+import { settings, select, classNames, templates } from "../settings.js";
+import { utils } from "../utils.js";
 import CartProduct from "./CartProduct.js";
 
 class Cart {
@@ -55,7 +55,7 @@ class Cart {
 		});
 	}
 	add(menuProduct) {
-		console.log("menuProduct", menuProduct);
+		//console.log("menuProduct", menuProduct);
 		const thisCart = this;
 		const generatedHTML = templates.cartProduct(menuProduct);
 		const generateDom = utils.createDOMFromHTML(generatedHTML);
@@ -93,7 +93,7 @@ class Cart {
 		const thisCart = this;
 		const url = settings.db.url + "/" + settings.db.orders;
 		let playload = {};
-		console.log.apply(playload);
+		//console.log.apply(playload);
 		playload.address = thisCart.dom.address.value;
 		playload.phone = thisCart.dom.phone.value;
 		playload.totalPrice = thisCart.totalPrice;
