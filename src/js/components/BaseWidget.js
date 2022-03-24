@@ -5,40 +5,45 @@ class BaseWidget {
 		thisWidget.dom = {};
 		thisWidget.dom.wrapper = wrapperElement;
 
-		thisWidget.value = initialValue;
+		thisWidget.correctValue = initialValue;
 	}
-
-	setValue(value) {
+	get value() {
 		const thisWidget = this;
-		const newValue = thisWidget.parseValue(value);
-		/*TODO Add validation*/
-		if (
-			thisWidget.value !== newValue &&
-			!isNaN(newValue) &&
-			isValid(newValue)
-		) {
-			thisWidget.value = newValue;
+		return thisWidget.correctValue;
+	}
+	set value(value) {
+		const thisWidget = this;
+		const newValue = thisWidget.parsedValue(value);
+
+		/* TODO: Add validation */
+		if (newValue != thisWidget.correctValue && thisWidget.isValid(newValue)) {
+			thisWidget.correctValue = newValue;
+			thisWidget.announce();
 		}
-		thisWidget.announce();
+
 		thisWidget.renderValue();
 	}
-	parseValue(value) {
-		return parsInt(value);
+	setValue(value) {
+		const thisWidget = this;
+		thisWidget.value = value;
 	}
-
+	parsedValue(value) {
+		return parseInt(value);
+	}
 	isValid(value) {
 		return !isNaN(value);
 	}
 	renderValue() {
 		const thisWidget = this;
-		thisWidget.wrapper.innerHTML = thisWidget.value;
+		thisWidget.dom.wrapper.innerHTML = thisWidget.value;
 	}
 	announce() {
 		const thisWidget = this;
-		const event = new CustomEvent("update", {
+
+		const event = new CustomEvent("updated", {
 			bubbles: true,
 		});
-		thisWidget.element.dispatchEvent(event);
+		thisWidget.dom.wrapper.dispatchEvent(event);
 	}
 }
 export default BaseWidget;

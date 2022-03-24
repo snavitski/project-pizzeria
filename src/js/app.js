@@ -35,20 +35,20 @@ const app = {
 			});
 		}
 	},
-	activatePage: function (pageId) {
+	activatePage: function (pageID) {
 		const thisApp = this;
 		/*
 		 add class "active" to matching pages, remove from non-matching */
 		for (let page of thisApp.pages) {
-			page.classList.toggle(classNames.pages.active, page.id == pageId);
-			//console.log(page, pageId, "pages");
+			page.classList.toggle(classNames.pages.active, page.id == pageID);
+			//console.log(page, pageID, "pages");
 		}
 		/*
 		 add class "active" to matching links, remove from non-matching */
 		for (let link of thisApp.navLinks) {
 			link.classList.toggle(
 				classNames.nav.active,
-				link.getAttribute("hre") == "#" + pageId
+				link.getAttribute("hre") == "#" + pageID
 			);
 		}
 	},
@@ -56,8 +56,23 @@ const app = {
 		const thisApp = this;
 		//console.log("thisApp.data;", thisApp.data);
 		for (let productData in thisApp.data.products) {
-			new Product(productData, thisApp.data.products[productData]);
+			new Product(
+				thisApp.data.products[productData].id,
+				thisApp.data.products[productData]
+			);
 		}
+	},
+
+	initCart: function () {
+		const thisApp = this;
+		const cartElem = document.querySelector(select.containerOf.cart);
+		thisApp.cart = new Cart(cartElem);
+
+		thisApp.productList = document.querySelector(select.containerOf.menu);
+
+		thisApp.productList.addEventListener("add-to-cart", function (event) {
+			app.cart.add(event.detail.product);
+		});
 	},
 	initData: function () {
 		const thisApp = this;
@@ -76,17 +91,6 @@ const app = {
 				thisApp.initMenu();
 			});
 		//console.log("thisApp.data", JSON.stringify(thisApp.data));
-	},
-	initCart: function () {
-		const thisApp = this;
-		const cartElem = document.querySelector(select.containerOf.cart);
-		thisApp.cart = new Cart(cartElem);
-
-		thisApp.productList = document.querySelector(select.containerOf.menu);
-
-		thisApp.productList.addEventListener("add-to-cart", function (event) {
-			app.cart.add(event.detail.product);
-		});
 	},
 	initBooking: function () {
 		const thisApp = this;
