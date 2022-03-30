@@ -1,6 +1,6 @@
 import BaseWidget from "../Components/BaseWidget.js";
 import { select, settings } from "../settings.js";
-import {utils} from "../utils.js";
+import { utils } from "../utils.js";
 
 class HourPicker extends BaseWidget {
 	constructor(wrapper) {
@@ -26,7 +26,7 @@ class HourPicker extends BaseWidget {
 		});
 	}
 
-	parseValue(value) {
+	parsedValue(value) {
 		return utils.numberToHour(value);
 	}
 
