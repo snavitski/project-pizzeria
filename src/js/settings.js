@@ -11,6 +11,7 @@ export const select = {
 		cart: "#cart",
 		pages: "#pages",
 		booking: ".booking-wrapper",
+		tables: '.floor-plan',
 	},
 	all: {
 		menuProducts: "#product-list > .product",
@@ -129,7 +130,7 @@ export const settings = {
 		orders: `orders`,
 		bookings: `bookings`,
 		events: `events`,
-		dataSartParamKey: `data_gte`,
+		dateSartParamKey: `date_gte`,
 		dateEndParamKey: `date_lte`,
 		notRepeatParam: `repeat=falce`,
 		repeatParam: `repeat_ne=falce`,
