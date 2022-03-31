@@ -19,7 +19,7 @@ class Booking {
 		const thisBooking = this;
 
 		const startDateParam =
-			settings.db.dateSartParamKey +
+			settings.db.dateStartParamKey +
 			"=" +
 			utils.dateToStr(thisBooking.datePicker.minDate);
 		const endDateParam =
@@ -164,29 +164,6 @@ class Booking {
 		}
 	}
 
-	initTables(event) {
-		event.preventDefault();
-		const thisBooking = this;
-		const element = event.target;
-		const clickedTable = element.classList.contains(classNames.booking.table);
-		const bookedTable = element.classList.contains(
-			classNames.booking.tableBooked
-		);
-		const selectedTable = element.classList.contains(
-			classNames.booking.tableSelected
-		);
-
-		if (clickedTable && !bookedTable) {
-			thisBooking.removeTableSelection();
-			if (!selectedTable) {
-				event.target.classList.toggle(classNames.booking.tableSelected);
-				thisBooking.tableSelected = parseInt(
-					element.getAttribute("data-table")
-				);
-			}
-		}
-	}
-
 	render(element) {
 		const thisBooking = this;
 		const generatedHTML = templates.bookingWidget(element);
@@ -250,7 +227,7 @@ class Booking {
 			thisBooking.sendBooking();
 		});
 	}
-	
+
 	removeTableSelection() {
 		const thisBooking = this;
 		for (const table of thisBooking.dom.tables) {

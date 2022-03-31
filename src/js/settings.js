@@ -11,7 +11,7 @@ export const select = {
 		cart: "#cart",
 		pages: "#pages",
 		booking: ".booking-wrapper",
-		tables: '.floor-plan',
+		tables: ".floor-plan",
 	},
 	all: {
 		menuProducts: "#product-list > .product",
@@ -90,9 +90,9 @@ export const classNames = {
 	},
 	booking: {
 		loadnig: "loadnig",
-		table: 'table',
+		table: "table",
 		tableBooked: `booked`,
-		tableSelected: 'selected',
+		tableSelected: "selected",
 	},
 	nav: {
 		active: "active",
@@ -130,7 +130,7 @@ export const settings = {
 		orders: `orders`,
 		bookings: `bookings`,
 		events: `events`,
-		dateSartParamKey: `date_gte`,
+		dateStartParamKey: `date_gte`,
 		dateEndParamKey: `date_lte`,
 		notRepeatParam: `repeat=falce`,
 		repeatParam: `repeat_ne=falce`,
