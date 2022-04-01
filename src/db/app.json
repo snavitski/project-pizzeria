@@ -198,11 +198,13 @@
 			}
 		}
 	],
+
 	"orders": [],
+
 	"events": [
 		{
 			"id": 1,
-			"date": "2021-01-01",
+			"date": "2022-02-08",
 			"hour": "12:30",
 			"table": 1,
 			"repeat": false,
@@ -251,15 +253,17 @@
 			"starters": ["lemonWater"]
 		}
 	],
+
 	"bookings": [
 		{
-			"id": 1,
-			"date": "2021-11-13",
-			"hour": "16",
-			"table": 1,
-			"duration": 3,
-			"ppl": 4,
-			"starters": ["water"]
+			"id": 5,
+			"date": "2022-02-08",
+			"hour": "18:00",
+			"table": 2,
+			"repeat": "daily",
+			"duration": 2,
+			"ppl": 3,
+			"starters": ["lemonWater"]
 		}
 	]
 }

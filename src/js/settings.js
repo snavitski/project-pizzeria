@@ -1,11 +1,9 @@
-/* eslint-disable */
 export const select = {
 	templateOf: {
 		menuProduct: "#template-menu-product",
 		cartProduct: "#template-cart-product",
 		bookingWidget: "#template-booking-widget",
 		homePage: "#template-home",
-		// CODE ADDED
 	},
 	containerOf: {
 		menu: "#product-list",
@@ -14,10 +12,6 @@ export const select = {
 		booking: ".booking-wrapper",
 		tables: ".floor-plan",
 		home: ".home-wrapper",
-	},
-	home: {
-		link: ".link",
-		carousel: "s",
 	},
 	all: {
 		menuProducts: "#product-list > .product",
@@ -30,39 +24,41 @@ export const select = {
 		priceElem: ".product__total-price .price",
 		imageWrapper: ".product__images",
 		amountWidget: ".widget-amount",
-		cartButton: `[href="#add-to-cart"]`,
+		cartButton: '[href="#add-to-cart"]',
 	},
 	widgets: {
 		amount: {
-			input: "input.amount", // CODE CHANGED
-			linkDecrease: `a[href="#less"]`,
-			linkIncrease: `a[href="#more"]`,
+			input: "input.amount",
+			linkDecrease: 'a[href="#less"]',
+			linkIncrease: 'a[href="#more"]',
 		},
 		datePicker: {
-			wrapper: `.date-picker`,
+			wrapper: ".date-picker",
 			input: `input[name="date"]`,
 		},
 		hourPicker: {
-			wrapper: `.hour-picker`,
-			input: `input[type="range"]`,
-			output: `.output`,
+			wrapper: ".hour-picker",
+			input: 'input[type="range"]',
+			output: ".output",
 		},
 	},
 	booking: {
-		peopleAmount: `.people-amount`,
-		hoursAmount: `.hours-amount`,
-		tables: `.floor-plan .table`,
-		floorPlan: ".floor-plan",
+		peopleAmount: ".people-amount",
+		hoursAmount: ".hours-amount",
+		tables: ".floor-plan .table",
 		form: ".booking-form",
-		submit: '.booking-form [type="submit"]',
+		submit: 'booking-form [type="submit"]',
+		starters: '.booking-form [name="starter"]',
 		phone: '.booking-form [name="phone"]',
 		address: '.booking-form [name="address"]',
-		starters: '.booking-form [name="starter"]',
+	},
+	home: {
+		link: ".link",
+		carousel: ".main-carousel",
 	},
 	nav: {
-		links: `main-nava a`,
+		links: ".main-nav a",
 	},
-	// CODE ADDED START
 	cart: {
 		productList: ".cart__order-summary",
 		toggleTrigger: ".cart__summary",
@@ -72,17 +68,16 @@ export const select = {
 		subtotalPrice: ".cart__order-subtotal .cart__order-price-sum strong",
 		deliveryFee: ".cart__order-delivery .cart__order-price-sum strong",
 		form: ".cart__order",
-		formSubmit: `.cart__order [type="submit"]`,
-		phone: `[name="phone"]`,
-		address: `[name="address"]`,
+		formSubmit: '.cart__order [type="submit"]',
+		phone: '[name="phone"]',
+		address: '[name="address"]',
 	},
 	cartProduct: {
 		amountWidget: ".widget-amount",
 		price: ".cart__product-price",
-		edit: `[href="#edit"]`,
-		remove: `[href="#remove"]`,
+		edit: '[href="#edit"]',
+		remove: '[href="#remove"]',
 	},
-	// CODE ADDED END
 };
 
 export const classNames = {
@@ -90,15 +85,14 @@ export const classNames = {
 		wrapperActive: "active",
 		imageVisible: "active",
 	},
-	// CODE ADDED START
 	cart: {
 		wrapperActive: "active",
 	},
 	booking: {
-		loadnig: "loadnig",
-		table: "table",
-		tableBooked: `booked`,
+		loading: "loading",
+		tableBooked: "booked",
 		tableSelected: "selected",
+		table: "table",
 	},
 	home: {
 		active: ".active",
@@ -110,7 +104,6 @@ export const classNames = {
 	pages: {
 		active: "active",
 	},
-	// CODE ADDED END
 };
 
 export const settings = {
@@ -118,50 +111,47 @@ export const settings = {
 		defaultValue: 1,
 		defaultMin: 1,
 		defaultMax: 9,
-	}, // CODE CHANGED
-	// CODE ADDED START
+	},
 	cart: {
 		defaultDeliveryFee: 20,
 	},
-
 	hours: {
 		open: 12,
-		closed: 24,
+		close: 24,
 	},
 	datePicker: {
 		maxDaysInFuture: 14,
 	},
 	booking: {
-		tableIdAttribute: `data-table`,
+		tableIdAttribute: "data-table",
 	},
 	db: {
-		url: `//localhost:3131`,
-		products: `products`,
-		orders: `orders`,
-		bookings: `bookings`,
-		events: `events`,
-		dateStartParamKey: `date_gte`,
-		dateEndParamKey: `date_lte`,
-		notRepeatParam: `repeat=falce`,
-		repeatParam: `repeat_ne=falce`,
+		url:
+			"//" +
+			window.location.hostname +
+			(window.location.hostname == "localhost" ? ":3131" : ""),
+		products: "products",
+		orders: "orders",
+		bookings: "bookings",
+		events: "events",
+		dateStartParamKey: "date_gte",
+		dateEndParamKey: "date_lte",
+		notRepeatParam: "repeat=false",
+		repeatParam: "repeat_ne=false",
 	},
-	// CODE ADDED END
 };
 
 export const templates = {
 	menuProduct: Handlebars.compile(
 		document.querySelector(select.templateOf.menuProduct).innerHTML
 	),
-	// CODE ADDED START
 	cartProduct: Handlebars.compile(
 		document.querySelector(select.templateOf.cartProduct).innerHTML
 	),
 	bookingWidget: Handlebars.compile(
 		document.querySelector(select.templateOf.bookingWidget).innerHTML
 	),
-
 	home: Handlebars.compile(
 		document.querySelector(select.templateOf.homePage).innerHTML
 	),
-	// CODE ADDED END
 };

@@ -7,9 +7,13 @@ import Home from "./components/Home.js";
 const app = {
 	initPages: function () {
 		const thisApp = this;
+
 		thisApp.pages = document.querySelector(select.containerOf.pages).children;
 		thisApp.navLinks = document.querySelectorAll(select.nav.links);
+
 		const idFromHash = window.location.hash.replace("#/", "");
+
+		thisApp.activatePage(idFromHash);
 
 		let pageMatchingHash = thisApp.pages[0].id;
 
@@ -26,36 +30,61 @@ const app = {
 			link.addEventListener("click", function (event) {
 				const clickedElement = this;
 				event.preventDefault();
-				/*  get page id from href attribute */
-				const id = clickedElement.getAttribute("href").replace("#", "");
 
-				/* run thisApp.activayePage with that id */
+				/* get page id from href attribute */
+
+				const id = clickedElement.getAttribute("href").replace("#", "");
+				console.log("id", id);
+
+				/* run thisApp.activatePage with id */
+
 				thisApp.activatePage(id);
+
 				/* change URL hash */
+
 				window.location.hash = "#/" + id;
 			});
 		}
 	},
-	activatePage: function (pageID) {
+
+	activatePage: function (pageId) {
 		const thisApp = this;
-		/*
-		 add class "active" to matching pages, remove from non-matching */
+
+		/* add class active to matching page, remove from non-matching */
+
 		for (let page of thisApp.pages) {
-			page.classList.toggle(classNames.pages.active, page.id == pageID);
-			//console.log(page, pageID, "pages");
+			page.classList.toggle(classNames.pages.active, page.id == pageId);
 		}
-		/*
-		 add class "active" to matching links, remove from non-matching */
+
+		/* add class active to matching page, remove from non-matching */
 		for (let link of thisApp.navLinks) {
 			link.classList.toggle(
 				classNames.nav.active,
-				link.getAttribute("hre") == "#" + pageID
+				link.getAttribute("href") == "#" + pageId
 			);
 		}
 	},
+	initData: function () {
+		const thisApp = this;
+
+		thisApp.data = {};
+
+		const url = settings.db.url + "/" + settings.db.products;
+
+		fetch(url)
+			.then(function (rawResponse) {
+				return rawResponse.json();
+			})
+			.then(function (parsedResponse) {
+				thisApp.data.products = parsedResponse;
+
+				thisApp.initMenu();
+			});
+	},
+
 	initMenu: function () {
 		const thisApp = this;
-		//console.log("thisApp.data;", thisApp.data);
+
 		for (let productData in thisApp.data.products) {
 			new Product(
 				thisApp.data.products[productData].id,
@@ -63,14 +92,20 @@ const app = {
 			);
 		}
 	},
-	initHome: function () {
+
+	init: function () {
 		const thisApp = this;
-		thisApp.homeWrapper = document.querySelector(select.containerOf.home);
-		thisApp.homeContainer = new Home(thisApp.homeWrapper);
+
+		thisApp.initData();
+		thisApp.initCart();
+		thisApp.initPages();
+		thisApp.initBooking();
+		thisApp.initHome();
 	},
 
 	initCart: function () {
 		const thisApp = this;
+
 		const cartElem = document.querySelector(select.containerOf.cart);
 		thisApp.cart = new Cart(cartElem);
 
@@ -81,42 +116,19 @@ const app = {
 		});
 	},
 
-	initData: function () {
-		const thisApp = this;
-		thisApp.data = {};
-		const url = settings.db.url + "/" + settings.db.products;
-		fetch(url)
-			.then(function (rawResponse) {
-				return rawResponse.json();
-			})
-			.then(function (parsedResponse) {
-				//console.log("parsedResponse", parsedResponse);
-				/* save parsedResponse as thisApp.data.product*/
-				thisApp.data.products = parsedResponse;
-
-				/* execute initMenu method */
-				thisApp.initMenu();
-			});
-		//console.log("thisApp.data", JSON.stringify(thisApp.data));
-	},
 	initBooking: function () {
 		const thisApp = this;
-		const bookingWidget = document.querySelector(select.containerOf.booking);
-		thisApp.Booking = new Booking(bookingWidget);
+
+		thisApp.bookingWrapper = document.querySelector(select.containerOf.booking);
+		thisApp.bookingContainer = new Booking(thisApp.bookingWrapper);
 	},
 
-	init: function () {
+	initHome: function () {
 		const thisApp = this;
-		//console.log("*** App starting ***");
-		//console.log("thisApp:", thisApp);
-		//console.log("classNames:", classNames);
-		//console.log("settings:", settings);
-		thisApp.initData();
-		thisApp.initCart();
-		thisApp.initBooking();
-		thisApp.initPages();
-		thisApp.initHome();
+
+		thisApp.homeWrapper = document.querySelector(select.containerOf.home);
+		thisApp.homeContainer = new Home(thisApp.homeWrapper);
 	},
 };
+
 app.init();
-export default app;

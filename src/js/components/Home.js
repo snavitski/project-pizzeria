@@ -6,7 +6,7 @@ class Home {
 
 		thisHome.render(element);
 		thisHome.initLinks();
-		// thisHome.initWidget();
+		//thisHome.initWidget();
 	}
 
 	render(element) {
@@ -62,8 +62,8 @@ class Home {
 
 	/*initWidget() {
 		const thisHome = this;
-		thisHome
-		thisHome.flkty = new Flickity(thisHome.dom.carousel, {
+		// eslint-disable-next-line no-undef
+		thisHome.flickity = new Flickity(thisHome.dom.carousel, {
 			cellAlign: "left",
 			contain: true,
 			prevNextButtons: false,
