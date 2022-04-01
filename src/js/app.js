@@ -2,6 +2,7 @@ import { settings, select, classNames } from "./settings.js";
 import Product from "./components/Product.js";
 import Cart from "./components/Cart.js";
 import Booking from "./components/Booking.js";
+import Home from "./components/Home.js";
 
 const app = {
 	initPages: function () {
@@ -62,6 +63,11 @@ const app = {
 			);
 		}
 	},
+	initHome: function () {
+		const thisApp = this;
+		thisApp.homeWrapper = document.querySelector(select.containerOf.home);
+		thisApp.homeContainer = new Home(thisApp.homeWrapper);
+	},
 
 	initCart: function () {
 		const thisApp = this;
@@ -74,6 +80,7 @@ const app = {
 			app.cart.add(event.detail.product);
 		});
 	},
+
 	initData: function () {
 		const thisApp = this;
 		thisApp.data = {};
@@ -108,6 +115,7 @@ const app = {
 		thisApp.initCart();
 		thisApp.initBooking();
 		thisApp.initPages();
+		thisApp.initHome();
 	},
 };
 app.init();

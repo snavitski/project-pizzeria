@@ -4,6 +4,7 @@ export const select = {
 		menuProduct: "#template-menu-product",
 		cartProduct: "#template-cart-product",
 		bookingWidget: "#template-booking-widget",
+		homePage: "#template-home",
 		// CODE ADDED
 	},
 	containerOf: {
@@ -12,6 +13,11 @@ export const select = {
 		pages: "#pages",
 		booking: ".booking-wrapper",
 		tables: ".floor-plan",
+		home: ".home-wrapper",
+	},
+	home: {
+		link: ".link",
+		carousel: "s",
 	},
 	all: {
 		menuProducts: "#product-list > .product",
@@ -94,6 +100,10 @@ export const classNames = {
 		tableBooked: `booked`,
 		tableSelected: "selected",
 	},
+	home: {
+		active: ".active",
+		carousel: ".main-carousel",
+	},
 	nav: {
 		active: "active",
 	},
@@ -148,6 +158,10 @@ export const templates = {
 	),
 	bookingWidget: Handlebars.compile(
 		document.querySelector(select.templateOf.bookingWidget).innerHTML
+	),
+
+	home: Handlebars.compile(
+		document.querySelector(select.templateOf.homePage).innerHTML
 	),
 	// CODE ADDED END
 };
