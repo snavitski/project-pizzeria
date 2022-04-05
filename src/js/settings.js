@@ -24,13 +24,13 @@ export const select = {
 		priceElem: ".product__total-price .price",
 		imageWrapper: ".product__images",
 		amountWidget: ".widget-amount",
-		cartButton: '[href="#add-to-cart"]',
+		cartButton: "[href='#add-to-cart']",
 	},
 	widgets: {
 		amount: {
 			input: "input.amount",
-			linkDecrease: 'a[href="#less"]',
-			linkIncrease: 'a[href="#more"]',
+			linkDecrease: "a[href='#less']",
+			linkIncrease: "a[href='#more']",
 		},
 		datePicker: {
 			wrapper: ".date-picker",
@@ -38,7 +38,7 @@ export const select = {
 		},
 		hourPicker: {
 			wrapper: ".hour-picker",
-			input: 'input[type="range"]',
+			input: `input[type="range"]`,
 			output: ".output",
 		},
 	},
@@ -47,10 +47,10 @@ export const select = {
 		hoursAmount: ".hours-amount",
 		tables: ".floor-plan .table",
 		form: ".booking-form",
-		submit: 'booking-form [type="submit"]',
-		starters: '.booking-form [name="starter"]',
-		phone: '.booking-form [name="phone"]',
-		address: '.booking-form [name="address"]',
+		submit: `booking-form [type="submit"]`,
+		starters: `.booking-form [name="starter"]`,
+		phone: `.booking-form [name="phone"]`,
+		address: `.booking-form [name="address"]`,
 	},
 	home: {
 		link: ".link",
@@ -68,15 +68,15 @@ export const select = {
 		subtotalPrice: ".cart__order-subtotal .cart__order-price-sum strong",
 		deliveryFee: ".cart__order-delivery .cart__order-price-sum strong",
 		form: ".cart__order",
-		formSubmit: '.cart__order [type="submit"]',
-		phone: '[name="phone"]',
-		address: '[name="address"]',
+		formSubmit: `.cart__order [type="submit"]`,
+		phone: `[name="phone"]`,
+		address: `[name="address"]`,
 	},
 	cartProduct: {
 		amountWidget: ".widget-amount",
 		price: ".cart__product-price",
-		edit: '[href="#edit"]',
-		remove: '[href="#remove"]',
+		edit: `[href="#edit"]`,
+		remove: `[href="#remove"]`,
 	},
 };
 

@@ -284,7 +284,7 @@ class Booking {
 		thisBooking.dom.form.addEventListener("submit", function (event) {
 			event.preventDefault();
 			thisBooking.sendBooking();
-			console.log("kliknąłem submit");
+			console.log("click submit");
 		});
 	}
 
