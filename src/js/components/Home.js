@@ -6,7 +6,7 @@ class Home {
 
 		thisHome.render(element);
 		thisHome.initLinks();
-		//thisHome.initWidget();
+		thisHome.initWidget();
 	}
 
 	render(element) {
@@ -60,7 +60,7 @@ class Home {
 		}
 	}
 
-	/*initWidget() {
+	initWidget() {
 		const thisHome = this;
 		// eslint-disable-next-line no-undef
 		thisHome.flickity = new Flickity(thisHome.dom.carousel, {
@@ -70,6 +70,6 @@ class Home {
 			wrapAround: true,
 			autoPlay: 3000,
 		});
-	}*/
+	}
 }
 export default Home;
